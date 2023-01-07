@@ -8,13 +8,15 @@ public class PlayerInventory : MonoBehaviour
     Item heldItem;
     [SerializeField]
     SpriteRenderer itemRenderer;
+    [SerializeField]
+    SpriteRenderer previewRenderer;
 
     GameObject lastPickedUpItem;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        previewRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -25,6 +27,7 @@ public class PlayerInventory : MonoBehaviour
 
     void PickupItem(Item item)
     {
+        previewRenderer.enabled = true;
         heldItem = item;
         itemRenderer.sprite = item.SO_Item.sprite;
         lastPickedUpItem = item.gameObject;
@@ -32,6 +35,7 @@ public class PlayerInventory : MonoBehaviour
     }
     void DropItem(Item item)
     {
+        previewRenderer.enabled = false ;
         heldItem = null;
         itemRenderer.sprite = null;
         if(lastPickedUpItem!=null)
@@ -84,6 +88,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void ClearItem()
     {
+        previewRenderer.enabled = false;
         heldItem = null;
         itemRenderer.sprite = null;
         lastPickedUpItem = null;

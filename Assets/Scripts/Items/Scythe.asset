@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: Scythe
   m_EditorClassIdentifier: 
   itemName: Scythe
-  sprite: {fileID: -2135585597343286014, guid: 4b2a04fdbe0ef4d8da8f90eaca817cd1, type: 3}
+  sprite: {fileID: 21300000, guid: 0e720df93351f4b4394429e1010c3f24, type: 3}
   held: 0
   lootable: 1
   count: 1
   maxCount: 1
   type: 1
   seedType: 0
+  ProductSprite: {fileID: 0}
   minGrowthTime: 0
   maxGrowthTime: 0
   state1Sprite: {fileID: 0}
   state2Sprite: {fileID: 0}
   state3Sprite: {fileID: 0}
   SpawnablePrefab: {fileID: 0}
+  moneyValue: 0
+  scoreValue: 0

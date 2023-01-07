@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: TestSeeds
   m_EditorClassIdentifier: 
   itemName: TestSeeds
-  sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  sprite: {fileID: 21300000, guid: 551c3c33938370d4ebff9e5d93f75094, type: 3}
   held: 0
   lootable: 1
   count: 5
   maxCount: 5
   type: 0
   seedType: 0
+  ProductSprite: {fileID: 21300000, guid: 688ccdee05b43d14f8fd0c3b4f2a957c, type: 3}
   minGrowthTime: 8
   maxGrowthTime: 10
   state1Sprite: {fileID: 0}
   state2Sprite: {fileID: 0}
   state3Sprite: {fileID: 0}
   SpawnablePrefab: {fileID: 1685899193799672454, guid: 5a9cd45ff01393a47b308c116d5e78cc, type: 3}
+  moneyValue: 0
+  scoreValue: 0

@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Watering Can
   m_EditorClassIdentifier: 
   itemName: Watering Can
-  sprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
+  sprite: {fileID: -833978469, guid: 5a9e80c304116084ba36d86252441574, type: 3}
   held: 0
   lootable: 1
   count: 1
   maxCount: 1
   type: 1
   seedType: 0
+  ProductSprite: {fileID: 0}
   minGrowthTime: 0
   maxGrowthTime: 0
   state1Sprite: {fileID: 0}
   state2Sprite: {fileID: 0}
   state3Sprite: {fileID: 0}
+  SpawnablePrefab: {fileID: 0}
+  moneyValue: 0
+  scoreValue: 0

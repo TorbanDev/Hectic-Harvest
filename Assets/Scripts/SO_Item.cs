@@ -13,6 +13,7 @@ public class SO_Item : ScriptableObject
     public int maxCount;
     public item_type type;
     public seed_type seedType;
+    public Sprite ProductSprite;
     public int minGrowthTime;
     public int maxGrowthTime;
     public Sprite state1Sprite;

@@ -6,11 +6,14 @@ using UnityEngine;
 public class Seed : Item
 {
     public int growthTime;
+    [SerializeField]
+    SpriteRenderer childSR;
     // Start is called before the first frame update
     public override void Awake()
     {
         base.Awake();
         growthTime = GetGrowthTime();
+        childSR.sprite = SO_Item.ProductSprite;
     }
 
     private int GetGrowthTime()
