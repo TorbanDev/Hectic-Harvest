@@ -31,7 +31,7 @@ public class Product : Item
                 {
                     int depositAmount = itemCount;
                     int amountAfterDepot = crate.currentAmount + depositAmount;
-                    if (amountAfterDepot>=crate.amountNeeded)
+                    if (amountAfterDepot>crate.amountNeeded)
                     {
                         depositAmount = amountAfterDepot - crate.amountNeeded;
                     }
