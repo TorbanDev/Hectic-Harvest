@@ -49,7 +49,6 @@ public class WaterBucket : Item
             }
 
         }
-        Debug.Log("didnt find valid Watering space");
     }
 
     private void RefillBucket()
@@ -57,7 +56,7 @@ public class WaterBucket : Item
         currentWaterLevel = maxWaterLevel;
         GameManager.Instance.HoldPlayer(1.5f*GameManager.Instance.workSpeed);
         // meter fill
-        // play sound
+        GameManager.Instance.FillBucket();
     }
 
     private void TryWater(CropLand crop)
@@ -69,8 +68,8 @@ public class WaterBucket : Item
         }
         else
         {
+            GameManager.Instance.CantDoThat();
             // show animation that bucket is empty;
-            Debug.Log("tried to water crop but can is empty!");
         }
     }
 }

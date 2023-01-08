@@ -28,4 +28,4 @@ MonoBehaviour:
   state3Sprite: {fileID: 339454297, guid: bb61d133dc66fb84b8df04541a38c084, type: 3}
   SpawnablePrefab: {fileID: 1685899193799672454, guid: de11f121c3a8fa940bcb95cb64b6018a, type: 3}
   moneyValue: 15
-  scoreValue: 30
+  scoreValue: 80

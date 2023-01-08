@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c717494f778e66449da1d22e49ebbd5, type: 3}
   m_Name: Faster Shoes
   m_EditorClassIdentifier: 
-  baseCost: 100
+  baseCost: 500
   additionalCost: 100
   title: Faster Shoes
   initialDescription: Run faster!

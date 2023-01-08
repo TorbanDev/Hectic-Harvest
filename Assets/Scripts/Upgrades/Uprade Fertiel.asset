@@ -17,5 +17,5 @@ MonoBehaviour:
   title: Fertile Soil
   initialDescription: Crops grow faster!
   additionalDescription: Even faster crops!
-  totalUpgrades: 2
+  totalUpgrades: 3
   type: 3

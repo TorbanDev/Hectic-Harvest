@@ -21,11 +21,11 @@ MonoBehaviour:
   type: 0
   seedType: 0
   ProductSprite: {fileID: 749916122, guid: c2ef94608f4bbfd4db9c1598271fb8c6, type: 3}
-  minGrowthTime: 18
-  maxGrowthTime: 18
+  minGrowthTime: 6
+  maxGrowthTime: 6
   state1Sprite: {fileID: 691983716, guid: 76d92ff5992bfce4bb9b482fa10136c4, type: 3}
   state2Sprite: {fileID: 435101543, guid: 76d92ff5992bfce4bb9b482fa10136c4, type: 3}
   state3Sprite: {fileID: -1183925067, guid: 76d92ff5992bfce4bb9b482fa10136c4, type: 3}
   SpawnablePrefab: {fileID: 1685899193799672454, guid: 0bd95086d871f8c4c9412eea6c37beab, type: 3}
-  moneyValue: 10
-  scoreValue: 20
+  moneyValue: 5
+  scoreValue: 15

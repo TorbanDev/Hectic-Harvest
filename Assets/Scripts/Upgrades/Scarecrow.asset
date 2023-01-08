@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Scarecrow
   m_EditorClassIdentifier: 
   baseCost: 200
-  additionalCost: 50
+  additionalCost: 200
   title: Work gloves
   initialDescription: Work faster!
   additionalDescription: Work even faster!
-  totalUpgrades: 2
+  totalUpgrades: 3
   type: 5

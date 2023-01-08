@@ -27,5 +27,5 @@ MonoBehaviour:
   state2Sprite: {fileID: 0}
   state3Sprite: {fileID: 0}
   SpawnablePrefab: {fileID: 0}
-  moneyValue: 5
-  scoreValue: 30
+  moneyValue: 20
+  scoreValue: 20

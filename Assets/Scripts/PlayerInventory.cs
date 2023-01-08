@@ -45,7 +45,6 @@ public class PlayerInventory : MonoBehaviour
         item.gameObject.transform.SetParent(gameObject.transform);
         item.gameObject.transform.position = itemRenderer.transform.position;
         lastPickedUpItem = item.gameObject;
-        Debug.Log("********PICKUP****************");
         if(item.gameObject.TryGetComponent(out Rigidbody2D rb))
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
@@ -95,10 +94,6 @@ public class PlayerInventory : MonoBehaviour
         Vector3 interactionDir = player.interactionDirection;
         Vector3 throwDir = (pos+interactionDir).normalized;
 
-        Debug.Log("player center pos: " + pos);
-        Debug.Log("interactionDir: " + interactionDir);
-        Debug.Log("throwDir: " + throwDir);
-
         previewRenderer.enabled = false ;
         heldItem = null;
         itemRenderer.sprite = null;
@@ -124,18 +119,14 @@ public class PlayerInventory : MonoBehaviour
     {
   
         
-            Debug.Log("trying to pickup");
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 1f);
             foreach(Collider2D col in cols)
             {
                 if(col.CompareTag("Player"))
                 {
-                    Debug.Log("found player");
                     continue;
                 }
-                Debug.Log("found col: "+col.gameObject.name);
                 if (col.gameObject.TryGetComponent(out Item item)) {
-                    Debug.Log("found Item component: " + col.gameObject.name);
                     if (item.SO_Item.lootable)
                     {
                         PickupItem(item);

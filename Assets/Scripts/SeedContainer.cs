@@ -31,7 +31,6 @@ public class SeedContainer : Item
     {
         GameObject obj = Instantiate(seedPouchPrefab, transform.position, Quaternion.identity);
         Seed seed = obj.GetComponent<Seed>();
-        if (seed == null) Debug.Log("couldnt grab seed from " + obj.name);
         seed.Setup(seedPouch);
         //obj.SetActive(false);
         return obj;

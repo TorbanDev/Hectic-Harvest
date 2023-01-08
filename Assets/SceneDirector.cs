@@ -18,10 +18,10 @@ public class SceneDirector : MonoBehaviour
     }
     public void Reset()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     public void ExitToTitle()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }

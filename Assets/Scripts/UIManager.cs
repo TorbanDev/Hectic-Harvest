@@ -35,7 +35,6 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
         ScoreHome = infoBoardContainer.transform.position;
-        Debug.Log("scorehome: " + ScoreHome);
     }
 
     // Update is called once per frame

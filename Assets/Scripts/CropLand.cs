@@ -100,7 +100,6 @@ public class CropLand : MonoBehaviour
     }
     public void Plow()
     {
-        Debug.Log("plowed");
         //sr.sprite = PlowedSprite;
         animator.SetTrigger("Plow");
         state = Crop_State.AWAITING_SEED;
@@ -117,7 +116,6 @@ public class CropLand : MonoBehaviour
     }
     public void Water()
     {
-        Debug.Log("watered");
         audioSource.PlayOneShot(waterClip);
         //sr.sprite = WateredSprite;
         animator.SetTrigger("Water");

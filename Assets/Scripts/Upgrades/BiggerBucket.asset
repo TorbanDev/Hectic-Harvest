@@ -17,5 +17,5 @@ MonoBehaviour:
   title: Bigger Cans
   initialDescription: More water in can
   additionalDescription: Even more water!
-  totalUpgrades: 3
+  totalUpgrades: 8
   type: 0

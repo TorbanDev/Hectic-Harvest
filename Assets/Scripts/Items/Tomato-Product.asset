@@ -20,11 +20,12 @@ MonoBehaviour:
   maxCount: 1
   type: 2
   seedType: 0
+  ProductSprite: {fileID: 0}
   minGrowthTime: 0
   maxGrowthTime: 0
   state1Sprite: {fileID: 0}
   state2Sprite: {fileID: 0}
   state3Sprite: {fileID: 0}
   SpawnablePrefab: {fileID: 0}
-  moneyValue: 10
-  scoreValue: 50
+  moneyValue: 5
+  scoreValue: 10

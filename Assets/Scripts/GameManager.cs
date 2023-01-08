@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     AudioClip coinClip;
     [SerializeField]
+    AudioClip waterfillClip;
+    [SerializeField]
     AudioClip strikeClip;
     [SerializeField]
     AudioClip blipClip;
@@ -33,6 +35,13 @@ public class GameManager : MonoBehaviour
     public AudioClip sowClip;
     [SerializeField]
     public AudioClip cantDoThatClip;
+
+    [SerializeField]
+    GameObject cornSpawner;
+    [SerializeField]
+    GameObject zukeSpawner;
+    [SerializeField]
+    GameObject grapeSpawner;
 
     // Upgrade refs
     [SerializeField]
@@ -77,6 +86,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject GoToShopButton;
 
+    [SerializeField]
+    SO_Item Tomato;
+    [SerializeField]
+    SO_Item Corn;
+    [SerializeField]
+    SO_Item Zuke;
+    [SerializeField]
+    SO_Item Grapes;
+    [SerializeField]
+    CrateSpawner spawner;
+    [SerializeField]
+    AudioManager audioManager;
+
 
     // Day/Night
     [SerializeField]
@@ -89,7 +111,7 @@ public class GameManager : MonoBehaviour
     float maxDayTimer = 30f;
     int dayState = 0;
 
-    public GM_STATE state = GM_STATE.PLAY;
+    public GM_STATE state = GM_STATE.PAUSE;
 
     public void CantDoThat()
     {
@@ -110,9 +132,11 @@ public class GameManager : MonoBehaviour
         {
             todaysSales.Add(crate.productNeeded, amount);
         }
-        Debug.Log("sold " + amount + " " + crate.SO_Item.itemName + ". new daily sales: " + dailyProfit);
     }
-
+    public void FillBucket()
+    {
+        audioSource.PlayOneShot(waterfillClip);
+    }
     public void DoUpgrade(Upgrade_type type)
     {
         switch(type)
@@ -168,8 +192,18 @@ public class GameManager : MonoBehaviour
         Instance = this;
         currentDayTimer = maxDayTimer;
         audioSource = GetComponent<AudioSource>();
+        StartCoroutine(StartGame());
     }
 
+    IEnumerator StartGame()
+    {
+        audioManager.PlayNight();
+        StartCoroutine(Sunup());
+        yield return new WaitForSeconds(3f);
+        state = GM_STATE.PLAY;
+        StartCoroutine(NextWave());
+        audioManager.PlayDay();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -181,17 +215,17 @@ public class GameManager : MonoBehaviour
                 currentDayTimer = maxDayTimer;
                 DayFinished();
             }
-            if(dayState<1&&(maxDayTimer-currentDayTimer)/maxDayTimer>=.5)
+            if(dayState<1&&(maxDayTimer-currentDayTimer)/maxDayTimer>=.75)
             {
                 dayState = 1;
                 StartCoroutine(Sundown());
             }
         }
     }
+    int overtime = 0;
 
     IEnumerator Sundown()
     {
-        Debug.Log("DIMMING");
         Color tempColor = nightSR.color;
         while (tempColor.a < .51)
         {
@@ -200,11 +234,10 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         }
-        Debug.Log("DONE");
+ 
     }
     IEnumerator Sunup()
     {
-        Debug.Log("BRIGHTENING");
         Color tempColor = nightSR.color;
         while (tempColor.a > 0)
         {
@@ -213,11 +246,13 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         }
-        Debug.Log("DONE");
+
     }
 
     private void DayFinished()
     {
+        audioManager.StopPlaying();
+        audioManager.PlayNight();
         state = GM_STATE.PAUSE;
         UIManager.Instance.ShowScore();
         UIManager.Instance.ShowBoard();
@@ -231,7 +266,7 @@ public class GameManager : MonoBehaviour
         dailyProfit = 0;
         dailyStrikes = 0;
         currentDayTimer = maxDayTimer;
-
+        todaysSales.Clear();
 
         // objects to cleanup
         if (inventory.HoldingItem())
@@ -259,6 +294,8 @@ public class GameManager : MonoBehaviour
     IEnumerator NewDayStart()
     {
         yield return new WaitForSeconds(2f);
+        audioManager.PlayDay();
+        StartCoroutine(NextWave());
         state = GM_STATE.PLAY;
         yield return null;
     }
@@ -281,7 +318,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SetScoreboard()
     {
-        Debug.Log("getting score");
         List<TextMeshProUGUI> moneys = new List<TextMeshProUGUI>();
         List<int[]> amountAndValue = new List<int[]>();
         yield return new WaitForSeconds(2f);
@@ -289,12 +325,9 @@ public class GameManager : MonoBehaviour
         // Stamp strikes
         if (dailyStrikes > 0)
         {
-            Debug.Log("Setting strikes");
             for(int i=0;i<dailyStrikes;i++)
             {
-                Debug.Log("i=" + i+". dailystrikes= "+ dailyStrikes);
                 yield return new WaitForSeconds(1f);
-                Debug.Log("STRIKE");
                 int strikeIndex = markedStrikes;
                 Strikes[strikeIndex].sprite = strikeSprite;
                 markedStrikes++;
@@ -358,7 +391,7 @@ public class GameManager : MonoBehaviour
                 totalProfit += 1;
                 moneyTextScoreboard.SetText("$"+totalProfit.ToString());
                 audioSource.PlayOneShot(coinClip);
-                yield return new WaitForSeconds(.05f);
+                yield return new WaitForSeconds(.0005f);
             }
         }
         GoToShopButton.SetActive(true);
@@ -386,14 +419,232 @@ public class GameManager : MonoBehaviour
     public void HoldPlayer(float scale)
     {
         float delay = player.ActionTime * scale;
-        Debug.Log("holding player for " + delay + " seconds");
         player.SetState(Player_State.INACTVE);
         Invoke("ReleasePlayer",delay);
     }
     public void ReleasePlayer()
     {
-        Debug.Log("releasing player");
         player.SetState(Player_State.ACTIVE);
+    }
+
+    IEnumerator NextWave()
+    {
+        List<SO_Item> products = new List<SO_Item>();
+        List<int> amounts = new List<int>();
+        float timer = 60;
+        float delay = 0f; ;
+
+        switch(dayCounter)
+        {
+            case 1:
+                products.Add(Tomato);
+                products.Add(Tomato);
+                products.Add(Tomato);
+                products.Add(Tomato);
+                products.Add(Tomato);
+                products.Add(Tomato);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(2);
+                amounts.Add(1);
+                amounts.Add(2);
+                amounts.Add(1);
+                break;
+            case 2:
+                cornSpawner.SetActive(true);
+                products.Add(Corn);
+                products.Add(Tomato);
+                products.Add(Corn);
+                products.Add(Tomato);
+                products.Add(Corn);
+                products.Add(Tomato);
+                amounts.Add(1);
+                amounts.Add(2);
+                amounts.Add(1);
+                amounts.Add(2);
+                amounts.Add(1);
+                amounts.Add(2);
+                break;
+            case 3:
+                products.Add(Corn);
+                products.Add(Tomato);
+                products.Add(Tomato);
+                products.Add(Corn);
+                amounts.Add(4);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(4);
+                break;
+            case 4:
+                zukeSpawner.SetActive(true);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                amounts.Add(3);
+                amounts.Add(3);
+                products.Add(Corn);
+                amounts.Add(1);
+                products.Add(Corn);
+                amounts.Add(1);
+                products.Add(Zuke);
+                amounts.Add(1);
+                break;
+            case 5:
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                products.Add(Zuke);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(1);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                break;
+            case 6:
+                products.Add(Corn);
+                amounts.Add(10);
+                timer = 110;
+                break;
+            case 7:
+                grapeSpawner.SetActive(true);
+                products.Add(Grapes);
+                products.Add(Tomato);
+                products.Add(Grapes);
+                products.Add(Corn);
+                products.Add(Grapes);
+                products.Add(Zuke);
+                products.Add(Grapes);
+                amounts.Add(3);
+                amounts.Add(1);
+                amounts.Add(3);
+                amounts.Add(1);
+                amounts.Add(3);
+                amounts.Add(1);
+                amounts.Add(1);
+                break;
+            case 8:
+                products.Add(Corn);
+                products.Add(Grapes);
+                products.Add(Zuke);
+                products.Add(Tomato);
+                products.Add(Corn);
+                products.Add(Grapes);
+                products.Add(Zuke);
+                products.Add(Tomato);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                break;
+            case 9:
+                products.Add(Zuke);
+                amounts.Add(15);
+                timer = 110f;
+                break;
+            case 10:
+                products.Add(Grapes);
+                products.Add(Zuke);
+                amounts.Add(7);
+                amounts.Add(7);
+                timer = 110f;
+                delay = 1f;
+                break;
+            case 11:
+                products.Add(Corn);
+                amounts.Add(20);
+                break;
+            case 12:
+                products.Add(Corn);
+                products.Add(Grapes);
+                products.Add(Zuke);
+                products.Add(Tomato);
+                products.Add(Corn);
+                products.Add(Grapes);
+                products.Add(Zuke);
+                products.Add(Tomato);
+                amounts.Add(3);
+                amounts.Add(3);
+                amounts.Add(3);
+                amounts.Add(3);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                amounts.Add(2);
+                break;
+            default:
+                overtime++;
+                if (dayCounter%2==0)
+                {
+                    products.Add(Corn);
+                    products.Add(Zuke);
+                    amounts.Add(Mathf.RoundToInt(dayCounter / 2));
+                    amounts.Add(Mathf.RoundToInt(dayCounter / 2));
+                    delay = 1f;
+                    timer = 110f;
+                }
+                else
+                {
+                    SO_Item tempP = null;
+                    int rand = UnityEngine.Random.Range(1, 4);
+                    switch (rand)
+                    {
+                        case 1: tempP = Zuke;
+                            break;
+                        case 2: tempP = Corn;
+                            break;
+                        case 3: tempP = Grapes;
+                            break;
+                        case 4: tempP = Tomato;
+                            break;
+                    }
+                    for(int i=0; i<= dayCounter;i++)
+                    {
+                        products.Add(tempP);
+                        amounts.Add(1);
+                    }
+                }
+                break;
+
+        }
+
+        delay=delay==0f ? (120 / (products.Count)) : delay;
+
+
+        int index = 0;
+        yield return new WaitForSeconds(2f);
+        foreach(SO_Item item in products)
+        {
+            Debug.Log("spawning an item");
+            SpawnCrate(item, amounts[index], timer);
+            index++;
+            yield return new WaitForSeconds(delay);
+        }
+        Debug.Log("done spawning");
+        products.Clear();
+        amounts.Clear();
+        yield return null;
+    }
+    void SpawnCrate(SO_Item product, int amountNeeded, float timer)
+    {
+        spawner.SpawnCrate(product, amountNeeded, timer);
     }
 }
 public enum GM_STATE

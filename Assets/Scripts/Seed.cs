@@ -64,13 +64,11 @@ public class Seed : Item
     void Plant(CropLand crop, Seed seed)
     {
         itemCount--;
-        Debug.Log("planting " + SO_Item.itemName + ". " + itemCount + " remaining");
         if (itemCount <= 0)
         {
             GameManager.Instance.ClearItem();
             gameObject.transform.SetParent(null);
             gameObject.SetActive(false);
-            Debug.Log("NO MORE " + SO_Item.itemName);
         }
     }
     

@@ -24,7 +24,6 @@ public class CrateSpawner : MonoBehaviour
 
     public void SpawnCrate(SO_Item product,int amountNeeded,float timer)
     {
-        // Eventually update this to pass in a prefab, determined by the difficulty controller
         Crate crate = Instantiate(cratePrefab, transform.position, Quaternion.identity).GetComponent<Crate>();
         crate.setupCrate(amountNeeded, timer, product);
     }
@@ -32,8 +31,9 @@ public class CrateSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        StartCoroutine(Spawn());
-    }
+        // TESTING
+        // StartCoroutine(Spawn());
+    } /* TESTING
     IEnumerator Spawn()
     {
         SpawnCrate(SO_zuch,2,1);
@@ -45,9 +45,6 @@ public class CrateSpawner : MonoBehaviour
         SpawnCrate(SO_corn, 10, 5f);
         yield return new WaitForSeconds(5f);
     }
+    */ 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

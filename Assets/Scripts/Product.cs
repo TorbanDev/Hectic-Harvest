@@ -27,13 +27,11 @@ public class Product : Item
             }
             if (col.gameObject.TryGetComponent(out Crate crate))
             {
-                Debug.Log("found a crate");
                 if (crate.productNeeded == SO_Item&&!crate.full)
                 {
-                    Debug.Log("Able to deposit product " + SO_Item.itemName + " into " + crate.name);
                     int depositAmount = itemCount;
                     int amountAfterDepot = crate.currentAmount + depositAmount;
-                    if (amountAfterDepot>crate.amountNeeded)
+                    if (amountAfterDepot>=crate.amountNeeded)
                     {
                         depositAmount = amountAfterDepot - crate.amountNeeded;
                     }
