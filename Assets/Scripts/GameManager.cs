@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
         Color tempColor = nightSR.color;
         while (tempColor.a < .51)
         {
-            tempColor.a += .00008f;
+            tempColor.a += .0008f;
             nightSR.color = tempColor;
             yield return null;
 
@@ -241,7 +241,7 @@ public class GameManager : MonoBehaviour
         Color tempColor = nightSR.color;
         while (tempColor.a > 0)
         {
-            tempColor.a -= .0008f;
+            tempColor.a -= .008f;
             nightSR.color = tempColor;
             yield return null;
 
