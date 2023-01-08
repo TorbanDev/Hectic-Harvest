@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f845c84c5bcdedf4c905d3d7ce56f691, type: 3}
-  m_Name: TomatoSeed
+  m_Name: Tomato-Seed
   m_EditorClassIdentifier: 
   itemName: TestSeeds
   sprite: {fileID: 21300000, guid: 551c3c33938370d4ebff9e5d93f75094, type: 3}
@@ -21,8 +21,8 @@ MonoBehaviour:
   type: 0
   seedType: 0
   ProductSprite: {fileID: 21300000, guid: 688ccdee05b43d14f8fd0c3b4f2a957c, type: 3}
-  minGrowthTime: 8
-  maxGrowthTime: 10
+  minGrowthTime: 12
+  maxGrowthTime: 12
   state1Sprite: {fileID: 21300000, guid: 520c7f8b4d004fc42989cd80714169ce, type: 3}
   state2Sprite: {fileID: 21300000, guid: 742b14696f4a3464090fc9bbd182deb9, type: 3}
   state3Sprite: {fileID: 21300000, guid: 7a6677a0c7b226b4daed958306c5e1bf, type: 3}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Plow : Item
 {
+    [SerializeField]
+    AudioClip plowClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,13 +33,14 @@ public class Plow : Item
                 if (crop.GetState() == Crop_State.AWAITING_PLOW)
                 {
                     crop.Plow();
-                    GameManager.Instance.HoldPlayer(0.6f);
-                    // Play SFX
+                    GameManager.Instance.HoldPlayer(0.6f*GameManager.Instance.workSpeed);
+                    audioSource.PlayOneShot(plowClip);
                     return;
                 }
             }
 
         }
-        Debug.Log("didnt find valid Plowing space");
+        GameManager.Instance.CantDoThat();
+
     }
 }

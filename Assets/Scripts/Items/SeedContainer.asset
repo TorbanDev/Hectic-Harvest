@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f845c84c5bcdedf4c905d3d7ce56f691, type: 3}
   m_Name: SeedContainer
   m_EditorClassIdentifier: 
-  itemName: TomatoContainer
+  itemName: SeedContainer
   sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   held: 0
   lootable: 0

@@ -5,14 +5,16 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public SO_Item SO_Item;
-    SpriteRenderer sr;
+    public SpriteRenderer sr;
     public int itemCount;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     public virtual void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = SO_Item.sprite;
         itemCount = SO_Item.maxCount;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

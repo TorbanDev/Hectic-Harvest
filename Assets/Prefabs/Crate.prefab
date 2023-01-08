@@ -34,7 +34,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.49000168, y: 0}
   m_SizeDelta: {x: 2.13, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 570441194}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Untagged
+  m_TagString: Perishable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -538,8 +538,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO_Item: {fileID: 11400000, guid: b6ff50926090bc242afbb4ae5e3f637f, type: 2}
   itemCount: 0
+  audioSource: {fileID: 0}
   productNeeded: {fileID: 11400000, guid: 2291885721d8be74b860ed19af0854ba, type: 2}
-  amountNeeded: 2
+  amountNeeded: 1
   currentAmount: 0
   full: 0
   productSR: {fileID: 4039046340503366778}
@@ -697,7 +698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4357214926781372701
 RectTransform:
   m_ObjectHideFlags: 0

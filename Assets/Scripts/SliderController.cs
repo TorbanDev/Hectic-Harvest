@@ -15,7 +15,7 @@ public class SliderController : MonoBehaviour
 
     private void Awake()
     {
-
+        Setup(30f);
     }
 
     public void Setup(float timer)
@@ -40,15 +40,20 @@ public class SliderController : MonoBehaviour
     }
     private void Update()
     {
-        if(maxTimer>0)
+        if(GameManager.Instance.state==GM_STATE.PLAY)
         {
-            progress -= Time.deltaTime;
-            UpdateProgress();
-            if (progress <= 0)
+            if (maxTimer > 0)
             {
-                TimesUp();
+                progress -= Time.deltaTime;
+                UpdateProgress();
+                if (progress <= 0)
+                {
+                    progress = maxTimer;
+                    TimesUp();
+                }
             }
         }
+
     }
     void TimesUp()
     {

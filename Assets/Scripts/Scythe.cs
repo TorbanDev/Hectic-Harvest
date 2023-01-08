@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Scythe : Item
 {
+    [SerializeField]
+    AudioClip harvestClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,11 @@ public class Scythe : Item
                 {
                     crop.Harvest();
                     // Play animation
-                    // Play SFX
+                    audioSource.PlayOneShot(harvestClip);
                 }
             }
 
         }
-        Debug.Log("didnt find valid Harvest space");
+        GameManager.Instance.CantDoThat();
     }
 }

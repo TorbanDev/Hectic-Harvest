@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f845c84c5bcdedf4c905d3d7ce56f691, type: 3}
+  m_Name: Grape-Seed
+  m_EditorClassIdentifier: 
+  itemName: Grape Seed
+  sprite: {fileID: 21300000, guid: 551c3c33938370d4ebff9e5d93f75094, type: 3}
+  held: 0
+  lootable: 1
+  count: 5
+  maxCount: 5
+  type: 0
+  seedType: 0
+  ProductSprite: {fileID: 303682002, guid: c2ef94608f4bbfd4db9c1598271fb8c6, type: 3}
+  minGrowthTime: 25
+  maxGrowthTime: 25
+  state1Sprite: {fileID: 47800875, guid: bb61d133dc66fb84b8df04541a38c084, type: 3}
+  state2Sprite: {fileID: 1066705184, guid: bb61d133dc66fb84b8df04541a38c084, type: 3}
+  state3Sprite: {fileID: 339454297, guid: bb61d133dc66fb84b8df04541a38c084, type: 3}
+  SpawnablePrefab: {fileID: 1685899193799672454, guid: de11f121c3a8fa940bcb95cb64b6018a, type: 3}
+  moneyValue: 15
+  scoreValue: 30

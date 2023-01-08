@@ -11,9 +11,18 @@ public class Seed : Item
     // Start is called before the first frame update
     public override void Awake()
     {
-        base.Awake();
+        sr = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
+
+    }
+    public void Setup(SO_Item seed)
+    {
+        SO_Item = seed;
+        childSR.sprite = seed.ProductSprite;
         growthTime = GetGrowthTime();
-        childSR.sprite = SO_Item.ProductSprite;
+        sr.sprite = SO_Item.sprite;
+        itemCount = SO_Item.maxCount;
     }
 
     private int GetGrowthTime()
@@ -50,7 +59,7 @@ public class Seed : Item
             }
             
         }
-        Debug.Log("didnt find valid planting space");
+        GameManager.Instance.CantDoThat();
     }
     void Plant(CropLand crop, Seed seed)
     {

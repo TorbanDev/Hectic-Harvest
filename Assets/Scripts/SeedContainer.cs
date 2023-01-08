@@ -8,6 +8,7 @@ public class SeedContainer : Item
     SpriteRenderer childSR;
     [SerializeField]
     SpriteRenderer productSR;
+    [SerializeField]
     GameObject seedPouchPrefab;
 
 
@@ -18,7 +19,6 @@ public class SeedContainer : Item
     {
         base.Awake();
         childSR.sprite = seedPouch.sprite;
-        seedPouchPrefab = SO_Item.SpawnablePrefab;
         productSR.sprite = seedPouch.ProductSprite;
     }
 
@@ -30,6 +30,9 @@ public class SeedContainer : Item
     public GameObject GetSeeds()
     {
         GameObject obj = Instantiate(seedPouchPrefab, transform.position, Quaternion.identity);
+        Seed seed = obj.GetComponent<Seed>();
+        if (seed == null) Debug.Log("couldnt grab seed from " + obj.name);
+        seed.Setup(seedPouch);
         //obj.SetActive(false);
         return obj;
     }

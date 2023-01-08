@@ -11,7 +11,7 @@ public class Crate : Item
     public bool full = false;
 
     [SerializeField]
-    SpriteRenderer productSR;
+    public SpriteRenderer productSR;
 
     SliderController sliderController;
 
@@ -24,8 +24,6 @@ public class Crate : Item
         base.Awake();
         sliderController = GetComponent<SliderController>();
         tmp = GetComponentInChildren<TextMeshProUGUI>();
-        UpdateText();
-        productSR.sprite = productNeeded.sprite;
     }
 
     void UpdateText()
@@ -33,8 +31,10 @@ public class Crate : Item
         tmp.SetText((amountNeeded-currentAmount).ToString());
     }
 
-    public void setupCrate(int amount, float timeAllowed)
+    public void setupCrate(int amount, float timeAllowed,SO_Item product)
     {
+        productNeeded= product;
+        productSR.sprite = productNeeded.sprite;
         amountNeeded = amount;
         sliderController.Setup(timeAllowed);
         sliderController.slider.gameObject.SetActive(true);
@@ -71,6 +71,6 @@ public class Crate : Item
             }
 
         }
-        Debug.Log("didnt find valid loading space");
+        GameManager.Instance.CantDoThat();
     }
 }

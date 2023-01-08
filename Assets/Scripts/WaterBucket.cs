@@ -19,6 +19,10 @@ public class WaterBucket : Item
     {
         
     }
+    public void Upgrade()
+    {
+        maxWaterLevel += 10;
+    }
 
     public override void Use()
     {
@@ -51,7 +55,7 @@ public class WaterBucket : Item
     private void RefillBucket()
     {
         currentWaterLevel = maxWaterLevel;
-        GameManager.Instance.HoldPlayer(1.5f);
+        GameManager.Instance.HoldPlayer(1.5f*GameManager.Instance.workSpeed);
         // meter fill
         // play sound
     }

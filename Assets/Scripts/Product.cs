@@ -52,6 +52,6 @@ public class Product : Item
             }
 
         }
-        Debug.Log("didnt find valid Crate deposit space");
+        GameManager.Instance.CantDoThat();
     }
 }

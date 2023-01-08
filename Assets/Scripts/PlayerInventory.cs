@@ -12,6 +12,8 @@ public class PlayerInventory : MonoBehaviour
     SpriteRenderer previewRenderer;
     [SerializeField]
     PlayerController player;
+    [SerializeField]
+    AudioClip autolootClip;
 
     [SerializeField]
     float dropRange;
@@ -51,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
         cachedLayer = lastPickedUpItem.layer;
         item.gameObject.layer = 6;
         // lastPickedUpItem.SetActive(false);
-        // Play pickup SFX pop sound
+        player.audioSource.PlayOneShot(player.pickupClip);
     }
     void StackItem(Item item)
     {
@@ -79,7 +81,7 @@ public class PlayerInventory : MonoBehaviour
         lastPickedUpItem.transform.SetParent(gameObject.transform);
         lastPickedUpItem.transform.position = itemRenderer.transform.position;
         // lastPickedUpItem.SetActive(false);
-        // Play pickup SFX pop sound
+        player.audioSource.PlayOneShot(player.pickupClip);
     }
     public void Throw()
     {
@@ -116,6 +118,7 @@ public class PlayerInventory : MonoBehaviour
         }
         lastPickedUpItem.layer = cachedLayer;
         lastPickedUpItem = null;
+        player.audioSource.PlayOneShot(player.dropClip);
     }
     public void TryGrab()
     {
@@ -145,6 +148,7 @@ public class PlayerInventory : MonoBehaviour
                         if(col.gameObject.TryGetComponent(out SeedContainer container))
                         {
                             PickupNonLootable(container);
+                            return;
                         }
                     }
                 }
@@ -178,7 +182,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (heldItem.itemCount < maxStackSize)
                 {
-                    Debug.Log("Stacking item and deleting copy");
+                    player.audioSource.PlayOneShot(autolootClip);
                     StackItem(product);
                 }
             }

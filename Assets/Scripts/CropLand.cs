@@ -32,6 +32,11 @@ public class CropLand : MonoBehaviour
 
     [SerializeField]
     Animator animator;
+
+    AudioSource audioSource;
+
+    [SerializeField]
+    AudioClip waterClip;
     
 
 
@@ -42,6 +47,7 @@ public class CropLand : MonoBehaviour
         sr.sprite = UnplowedSprite;
         animator = GetComponent<Animator>();
         currentRegenTime = maxRegenTime;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -102,9 +108,9 @@ public class CropLand : MonoBehaviour
     public void PlantSeed(Seed newSeed)
     {
         seed = newSeed;
-        //sr.sprite = SowedSprite;
+        audioSource.PlayOneShot(GameManager.Instance.sowClip);
         growthState = 0;
-        maxGrowthTime = seed.growthTime;
+        maxGrowthTime = seed.growthTime*GameManager.Instance.growthReduction;
         currentGrowthTime = maxGrowthTime;
         animator.SetTrigger("Sow");
         state = Crop_State.AWAITING_WATER;
@@ -112,6 +118,7 @@ public class CropLand : MonoBehaviour
     public void Water()
     {
         Debug.Log("watered");
+        audioSource.PlayOneShot(waterClip);
         //sr.sprite = WateredSprite;
         animator.SetTrigger("Water");
         state = Crop_State.GROWING;
@@ -127,13 +134,14 @@ public class CropLand : MonoBehaviour
     }
     public void Harvest()
     {
-        //sr.sprite = UnplowedSprite;
+
         animator.SetTrigger("Harvest");
         plantSR.sprite = null;
         SpawnProduct();
-        currentRegenTime = maxRegenTime;
+        currentRegenTime = maxRegenTime-GameManager.Instance.regenTime;
         state = Crop_State.DEAD;
         seed = null;
+
 
     }
 

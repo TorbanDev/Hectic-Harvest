@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f845c84c5bcdedf4c905d3d7ce56f691, type: 3}
-  m_Name: TestProduct
+  m_Name: Corn-Product
   m_EditorClassIdentifier: 
-  itemName: Test Product
-  sprite: {fileID: 21300000, guid: 688ccdee05b43d14f8fd0c3b4f2a957c, type: 3}
+  itemName: Corn Product
+  sprite: {fileID: -185875850, guid: c2ef94608f4bbfd4db9c1598271fb8c6, type: 3}
   held: 0
   lootable: 1
   count: 1
   maxCount: 1
   type: 2
   seedType: 0
+  ProductSprite: {fileID: -185875850, guid: c2ef94608f4bbfd4db9c1598271fb8c6, type: 3}
   minGrowthTime: 0
   maxGrowthTime: 0
   state1Sprite: {fileID: 0}
   state2Sprite: {fileID: 0}
   state3Sprite: {fileID: 0}
   SpawnablePrefab: {fileID: 0}
-  moneyValue: 10
-  scoreValue: 50
+  moneyValue: 5
+  scoreValue: 30

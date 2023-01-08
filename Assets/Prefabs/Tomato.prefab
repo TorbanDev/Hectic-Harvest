@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1685899193799672448}
   - component: {fileID: 1685899193799672449}
   m_Layer: 6
-  m_Name: TestProduct
-  m_TagString: Untagged
+  m_Name: Tomato
+  m_TagString: Perishable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO_Item: {fileID: 11400000, guid: 2291885721d8be74b860ed19af0854ba, type: 2}
   itemCount: 1
+  audioSource: {fileID: 0}
 --- !u!50 &1685899193799672448
 Rigidbody2D:
   serializedVersion: 4
