@@ -10,9 +10,15 @@ public class PlayerController : MonoBehaviour
     private PlayerInventory inventory;
     [SerializeField] PlayerInteract interact;
     public float ActionTime = 1.5f;
+    [SerializeField]
+    public Transform playerCenter;
+
+    public float throwForce = 2f;
 
     private Vector2 movement_direction;
+    public Vector2 interactionDirection;
     private Rigidbody2D player_rigidbody;
+    private Vector2 nullDirection = new Vector2(0f, 0f);
     Player_State state = Player_State.ACTIVE;
 
     // Start is called before the first frame update
@@ -34,22 +40,17 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(0))
             {
-                if (inventory.HoldingItem())
-                {
-                    interact.UseItem();
-
-                }
-                else
-                {
-                    Debug.Log("not holding anything");
-                    return;
-                }
+                interact.GrabOrUseItem();
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                inventory.TryGrabDrop();
+                interact.ThrowItem();
                 ButtonPress(KeyCode.Mouse1);
             }
+        }
+        if(movement_direction!= nullDirection)
+        {
+            interactionDirection = movement_direction;
         }
     }
 
@@ -57,7 +58,10 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-
+    public bool IsStationary()
+    {
+        return movement_direction == nullDirection;
+    }
     private void FixedUpdate()
     {
         if (state == Player_State.ACTIVE)

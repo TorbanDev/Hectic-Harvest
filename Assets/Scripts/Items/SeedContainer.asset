@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f845c84c5bcdedf4c905d3d7ce56f691, type: 3}
+  m_Name: SeedContainer
+  m_EditorClassIdentifier: 
+  itemName: TomatoContainer
+  sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  held: 0
+  lootable: 0
+  count: 1
+  maxCount: 1
+  type: 1
+  seedType: 1
+  ProductSprite: {fileID: 0}
+  minGrowthTime: 0
+  maxGrowthTime: 0
+  state1Sprite: {fileID: 0}
+  state2Sprite: {fileID: 0}
+  state3Sprite: {fileID: 0}
+  SpawnablePrefab: {fileID: 2022928998097062902, guid: 3d46b587152eff2409ed0cf1dd09d021, type: 3}
+  moneyValue: 0
+  scoreValue: 0

@@ -10,12 +10,20 @@ public class PlayerInteract : MonoBehaviour
     {
         inventory = GetComponent<PlayerInventory>();
     }
-    public void UseItem()
+    public void GrabOrUseItem()
     {
         if(inventory.HoldingItem())
         {
             inventory.GetHeldItem().Use();
         }
+        else
+        {
+            inventory.TryGrab();
+        }
+    }
+    public void ThrowItem()
+    {
+        inventory.Throw();
     }
 
 }

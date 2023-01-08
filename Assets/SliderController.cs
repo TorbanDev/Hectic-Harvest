@@ -7,8 +7,6 @@ public class SliderController : MonoBehaviour
 {
     float progress;
     public float maxTimer;
-    [SerializeField]
-    GameObject parent;
 
     public Slider slider;
     [SerializeField]
@@ -17,6 +15,12 @@ public class SliderController : MonoBehaviour
 
     private void Awake()
     {
+
+    }
+
+    public void Setup(float timer)
+    {
+        maxTimer = timer;
         progress = maxTimer;
         slider.maxValue = maxTimer;
     }
@@ -36,15 +40,19 @@ public class SliderController : MonoBehaviour
     }
     private void Update()
     {
-        progress -= Time.deltaTime;
-        UpdateProgress();
-        if (progress<=0)
+        if(maxTimer>0)
         {
-            TimesUp();
+            progress -= Time.deltaTime;
+            UpdateProgress();
+            if (progress <= 0)
+            {
+                TimesUp();
+            }
         }
     }
     void TimesUp()
     {
-        parent.SetActive(false);
+        GameManager.Instance.AddStrike();
+        gameObject.SetActive(false);
     }
 }

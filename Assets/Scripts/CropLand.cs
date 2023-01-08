@@ -8,6 +8,8 @@ public class CropLand : MonoBehaviour
     float maxGrowthTime;
     float currentGrowthTime;
     int growthState = 0;
+    float maxRegenTime=10f;
+    float currentRegenTime;
 
     public Crop_State state;
     Seed seed;
@@ -39,6 +41,7 @@ public class CropLand : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = UnplowedSprite;
         animator = GetComponent<Animator>();
+        currentRegenTime = maxRegenTime;
     }
 
     // Update is called once per frame
@@ -58,6 +61,7 @@ public class CropLand : MonoBehaviour
             case Crop_State.AWAITING_HARVEST:
                 break;
             case Crop_State.DEAD:
+                Regen();
                 break;
             default: break;
         }
@@ -119,7 +123,6 @@ public class CropLand : MonoBehaviour
     }
     public void FinishGrowth()
     {
-        Debug.Log("now awaiting harvest");
         state = Crop_State.AWAITING_HARVEST;
     }
     public void Harvest()
@@ -128,7 +131,8 @@ public class CropLand : MonoBehaviour
         animator.SetTrigger("Harvest");
         plantSR.sprite = null;
         SpawnProduct();
-        state = Crop_State.AWAITING_PLOW;
+        currentRegenTime = maxRegenTime;
+        state = Crop_State.DEAD;
         seed = null;
 
     }
@@ -184,10 +188,28 @@ public class CropLand : MonoBehaviour
             case Crop_State.AWAITING_HARVEST:
                 break;
             case Crop_State.DEAD:
+                Regen();
                 break;
             default: break;
         }
 
+    }
+
+    private void Regen()
+    {
+        currentRegenTime -= Time.deltaTime;
+        if (currentRegenTime <= 0)
+        {
+            // finished growing
+            FinishRegen();
+            return;
+        }
+    }
+
+    private void FinishRegen()
+    {
+        state = Crop_State.AWAITING_PLOW;
+        animator.SetTrigger("Regen");
     }
 }
 public enum Crop_State

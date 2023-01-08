@@ -42,6 +42,8 @@ public class Product : Item
                     if(itemCount<=0)
                     {
                         GameManager.Instance.ClearItem();
+                        gameObject.transform.SetParent(null);
+                        gameObject.SetActive(false);
                     }
                     // Play animation
                     // Play SFX

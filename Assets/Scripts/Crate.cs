@@ -13,6 +13,8 @@ public class Crate : Item
     [SerializeField]
     SpriteRenderer productSR;
 
+    SliderController sliderController;
+
     TextMeshProUGUI tmp;
 
 
@@ -20,19 +22,24 @@ public class Crate : Item
     public override void Awake()
     {
         base.Awake();
+        sliderController = GetComponent<SliderController>();
         tmp = GetComponentInChildren<TextMeshProUGUI>();
         UpdateText();
         productSR.sprite = productNeeded.sprite;
     }
+
     void UpdateText()
     {
         tmp.SetText((amountNeeded-currentAmount).ToString());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setupCrate(int amount, float timeAllowed)
     {
-        
+        amountNeeded = amount;
+        sliderController.Setup(timeAllowed);
+        sliderController.slider.gameObject.SetActive(true);
+        UpdateText();
+
     }
     public void Deposit(Product product, int amount)
     {
@@ -45,6 +52,7 @@ public class Crate : Item
     }
     public override void Use()
     {
+        if (!full) return;
         Vector2 pos = GameManager.Instance.GetPlayerPos();
         Collider2D[] cols = Physics2D.OverlapCircleAll(pos, 1f);
         foreach (Collider2D col in cols)
@@ -57,6 +65,8 @@ public class Crate : Item
             {
                 GameManager.Instance.SellProduct(this);
                 GameManager.Instance.ClearItem();
+                gameObject.transform.parent = null;
+                gameObject.SetActive(false);
                 return;
             }
 
